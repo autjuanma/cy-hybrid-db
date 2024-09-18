@@ -1,5 +1,7 @@
 # [cy-hybrid-db]
 
+![alt text](https://github.com/juansitoAUT/cy-hybrid-db/blob/master/.0876545678.png)
+
 [ Brief project description ]
 
 ## Overview
@@ -24,3 +26,4 @@
 ## Getting Started
 
 * [Provide instructions on how to get started with your project, e.g., installation, configuration, usage]
+
