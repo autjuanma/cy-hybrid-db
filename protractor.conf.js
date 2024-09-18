@@ -9,7 +9,7 @@ exports.config = {
     },
     framework: 'mocha',
     specs: [
-        './cypress/e2e/**/*.js'
+        './cypress/e2e/**/*.spec.js'
     ],
     logLevel: 'INFO',
     mochaOpts: {
@@ -27,9 +27,3 @@ exports.config = {
     },
 
 };
-/*
-====================================================================
-For full list of Protractor config options,
-see- https://github.com/angular/protractor/blob/master/lib/config.ts
-====================================================================
-**/

@@ -1,11 +1,11 @@
 {
   "name": "cy-hybrid-cli",
   "version": "1.0.0",
+  "types": "module",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run --spec 'cypress/e2e/**/*.spec.js'",
-    "test:open": "cypress open",
-    "db-test" :"cypress run --spec 'cypress/e2e/create-table.spec.js'"
+    "test": "cypress run --spec './cypress/e2e/**/*.spec.js'",
+    "test:open": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "description": "",
   "devDependencies": {
     "cypress": "^13.14.2",
+    "glob-run": "^0.1.7",
     "mochawesome": "^7.1.3",
     "pg": "^8.13.0",
     "protractor": "^7.0.0",
