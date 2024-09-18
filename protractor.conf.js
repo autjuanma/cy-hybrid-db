@@ -9,7 +9,7 @@ exports.config = {
     },
     framework: 'mocha',
     specs: [
-        './test/specs/**/*.js'
+        './cypress/e2e/**/*.js'
     ],
     logLevel: 'INFO',
     mochaOpts: {

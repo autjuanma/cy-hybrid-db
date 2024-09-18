@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run",
-    "test:open": "cypress open"
+    "test": "cypress run --spec 'cypress/e2e/**/*.spec.js'",
+    "test:open": "cypress open",
+    "db-test" :"cypress run --spec 'cypress/e2e/create-table.spec.js'"
   },
   "keywords": [],
   "author": "",
