@@ -1,14 +1,13 @@
 const { defineConfig } = require('cypress');
 const { Pool } = require('pg');
 
-// Create a separate function to get the env object
 function getEnv() {
   return {
     db: {
-      host: '127.0.0.1', // Update with your PostgreSQL host
-      user: 'adm', // Update with your PostgreSQL username
-      password: 'admin', // Update with your PostgreSQL password
-      database: 'my-cy-database', // Update with your PostgreSQL database name
+      host: '127.0.0.1',
+      user: 'adm',
+      password: 'admin',
+      database: 'my-cy-database',
     },
   };
 }
@@ -44,7 +43,6 @@ function queryTestDb(query, env) {
     });
 }
 
-// Test connection to PostgreSQL database
 async function testConnection() {
   try {
     const query = 'SELECT 1';
