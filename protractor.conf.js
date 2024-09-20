@@ -4,9 +4,17 @@ exports.config = {
 
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
     baseUrl: 'https://jsonplaceholder.typicode.com/',
-    capabilities: {
-        browserName: 'chrome'
-    },
+    multiCapabilities: [
+        {
+            browserName: 'chrome'
+        },
+        {
+            browserName: 'firefox'
+        },
+        {
+            browserName: 'edge'
+        }
+    ],
     framework: 'mocha',
     specs: [
         './cypress/e2e/**/*.spec.js'
@@ -15,7 +23,7 @@ exports.config = {
     mochaOpts: {
         bail: true,
         colors: true,
-        compilers: ,
+        compilers: '',
         reporter: 'mochawesome',
         reporterOptions: {
             reportDir: './reports',
