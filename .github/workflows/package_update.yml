@@ -6,8 +6,8 @@ on:
     - cron: '0 0 * * 3'
 
 env:
-  AUTHOR_EMAIL: ashikkumar23@gmail.com
-  AUTHOR_NAME: Ashik Kumar
+  AUTHOR_EMAIL: [juanTM]
+  AUTHOR_NAME: [juanTM]
   LOG_LEVEL: debug
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
