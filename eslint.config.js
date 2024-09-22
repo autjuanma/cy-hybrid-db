@@ -1,5 +1,4 @@
 module.exports = {
-  root: true,
   env: {
     'cypress/globals': true,
   },
