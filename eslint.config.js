@@ -1,10 +1,12 @@
 module.exports = {
-  env: {
-    'cypress/globals': true,
-  },
   overrides: [
     {
       files: ['**/*.{js,jsx,ts,tsx}'],
+      languageOptions: {
+        globals: {
+          'cypress/globals': true,
+        },
+      },
       plugins: {
         cypress: 'recommended',
       },
