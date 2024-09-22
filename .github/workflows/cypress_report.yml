@@ -62,7 +62,7 @@ jobs:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Run CodeClimate 🧪
-        run: ./node_modules/.bin/npx codeclimate analyze
+        run: npm run codeclimate analyze
 
       - name: Merge test results into one 📊
         run: npm run report:merge
@@ -71,7 +71,7 @@ jobs:
         run: npm run report:generate
 
       - name: Generate Report 📊
-        run: ./node_modules/.bin/npx codeclimate report --format=html > codeclimate-report.html
+        run: npm run codeclimate report --format=html > codeclimate-report.html
 
       - name: Publish report to GitHub Pages 📄
         uses: peaceiris/actions-gh-pages@v3
