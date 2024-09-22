@@ -1,40 +1,38 @@
-module.exports = {
-  overrides: [
-    {
-      files: ['**/*.{js,jsx,ts,tsx}'],
-      languageOptions: {
-        globals: {
-          'cypress/globals': true,
+module.exports = [
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      globals: {
+        'cypress/globals': true,
+      },
+    },
+    plugins: {
+      cypress: 'recommended',
+    },
+    rules: {
+      'semi': 'error',
+      'no-duplicate-imports': 'off',
+      'import/no-duplicates': 'error',
+      'prefer-spread': 'off',
+      'prefer-rest-params': 'off',
+      'no-useless-constructor': 'off',
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'process',
+          property: 'geteuid',
+          message: 'process.geteuid() will throw on Windows. Do not use it unless you catch any potential errors.',
         },
-      },
-      plugins: {
-        cypress: 'recommended',
-      },
-      rules: {
-        'semi': 'error',
-        'no-duplicate-imports': 'off',
-        'import/no-duplicates': 'error',
-        'prefer-spread': 'off',
-        'prefer-rest-params': 'off',
-        'no-useless-constructor': 'off',
-        'no-restricted-properties': [
-          'error',
-          {
-            object: 'process',
-            property: 'geteuid',
-            message: 'process.geteuid() will throw on Windows. Do not use it unless you catch any potential errors.',
-          },
-          {
-            object: 'os',
-            property: 'userInfo',
-            message: 'os.userInfo() will throw when there is not an `/etc/passwd` entry for the current user (like when running with --user 12345 in Docker). Do not use it unless you catch any potential errors.',
-          },
-        ],
-      },
+        {
+          object: 'os',
+          property: 'userInfo',
+          message: 'os.userInfo() will throw when there is not an `/etc/passwd` entry for the current user (like when running with --user 12345 in Docker). Do not use it unless you catch any potential errors.',
+        },
+      ],
     },
-    {
-      files: ['*.json'],
-      extends: 'plugin:@cypress/dev/general',
-    },
-  ],
-};
+  },
+  {
+    files: ['*.json'],
+    extends: 'plugin:@cypress/dev/general',
+  },
+];
