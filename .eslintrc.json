@@ -1,13 +1,18 @@
 {
-    "root": true,
-    "env": {
-      "cypress/globals": true
-    },
-    "plugins": {
-      "cypress": "recommended",
-      "eslint": "error"
-    },
-    "rules": {
-      "semi": "error"
+  "root": true,
+  "env": {
+    "cypress/globals": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{js,jsx,ts,tsx}"],
+      "plugins": {
+        "cypress": "recommended",
+        "eslint": "error"
+      },
+      "rules": {
+        "semi": "error"
+      }
     }
-  }
+  ]
+}
