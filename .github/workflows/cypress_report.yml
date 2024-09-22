@@ -13,41 +13,47 @@ jobs:
     container:
       image: cypress/browsers:node16.16.0-chrome107-ff107
     steps:
-      - name: Checkout code repository
+      - name: Checkout code repository 📂
         uses: actions/checkout@v3
 
-      - name: Install Cypress
+      - name: Install Cypress 📦
         run: npm install cypress
 
-      - name: Cache Cypress dependencies
+      - name: Install ESLint 📝
+        run: npm install eslint
+
+      - name: Install CodeClimate 🌡️
+        run: npm install codeclimate
+
+      - name: Cache Cypress dependencies 💻
         uses: actions/cache@v3
         id: cache-cypress-deps
         with:
           path: ~/.npm
           key: ${{ runner.os }}-cypress-deps-${{ matrix.cypress }}
 
-      - name: Cache Cypress binary
+      - name: Cache Cypress binary 💻
         uses: actions/cache@v3
         id: cache-cypress-binary
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-binary-${{ matrix.cypress }}
 
-      - name: Restore Cypress dependencies
+      - name: Restore Cypress dependencies 🔙
         uses: actions/cache@v3
         id: restore-cypress-deps
         with:
           path: ~/.npm
           key: ${{ runner.os }}-cypress-deps-${{ matrix.cypress }}
 
-      - name: Restore Cypress binary
+      - name: Restore Cypress binary 🔙
         uses: actions/cache@v3
         id: restore-cypress-binary
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-binary-${{ matrix.cypress }}
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests 🧪
         uses: cypress-io/github-action@v5
         continue-on-error: true
         with:
@@ -55,30 +61,24 @@ jobs:
         env:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Merge test results into one
+      - name: Run ESLint 🧪
+        run: npx eslint .
+
+      - name: Run CodeClimate 🧪
+        run: npx codeclimate analyze
+
+      - name: Merge test results into one 📊
         run: npm run report:merge
 
-      - name: Generate HTML report
+      - name: Generate HTML report 📊
         run: npm run report:generate
 
-      - name: Publish report to GitHub Pages
+      - name: Generate Report 📊
+        run: npx codeclimate report --format=html > codeclimate-report.html
+
+      - name: Publish report to GitHub Pages 📄
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-
-      - name: Install ESLint
-        run: npm install eslint
-
-      - name: Run ESLint
-        run: npx eslint .
-
-      - name: Install CodeClimate
-        run: npm install codeclimate
-
-      - name: Run CodeClimate
-        run: npx codeclimate analyze
-
-      - name: Generate Report
-        run: npx codeclimate report --format=html > codeclimate-report.html
