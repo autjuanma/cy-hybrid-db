@@ -28,8 +28,7 @@
             "property": "userInfo",
             "message": "os.userInfo() will throw when there is not an `/etc/passwd` entry for the current user (like when running with --user 12345 in Docker). Do not use it unless you catch any potential errors."
           }
-        ],
-        "constructor-super": "off" // Disable the constructor-super rule
+        ]
       }
     },
     {
