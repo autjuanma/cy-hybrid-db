@@ -1,10 +1,4 @@
 module.exports = {
-  // Define the environment
-  env: {
-    node: true,
-    browser: true, // Add browser environment for Cypress
-  },
-
   // Extend a popular ESLint configuration (e.g., Airbnb)
   extends: 'airbnb-base',
 
@@ -18,6 +12,10 @@ module.exports = {
     parserOptions: {
       ecmaVersion: 2020,
       sourceType: 'module',
+    },
+    globals: {
+      node: true,
+      browser: true, // Add browser environment for Cypress
     },
   },
 
