@@ -1,10 +1,4 @@
 module.exports = {
-  // Enable ESLint to parse JavaScript files
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-  },
-
   // Define the environment
   env: {
     node: true,
@@ -17,6 +11,14 @@ module.exports = {
   // Plugins
   plugins: {
     cypress: {}, // Initialize the Cypress plugin with an empty object
+  },
+
+  // Language options
+  languageOptions: {
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
+    },
   },
 
   // Rules
