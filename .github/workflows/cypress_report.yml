@@ -18,7 +18,9 @@ jobs:
       - name: Install Cypress 📦
         run: npm install cypress
       - name: Install CodeClimate 🌡️
-        run: npm install --save-dev codeclimate
+        run: |
+          npm install --save-dev codeclimate
+          npm link codeclimate
       - name: Verify CodeClimate installation
         run: npm ls codeclimate
       - name: Cache Cypress dependencies 💻
