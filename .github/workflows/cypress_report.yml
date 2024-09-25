@@ -49,7 +49,7 @@ jobs:
         env:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Run CodeClimate 🧪
-        uses: paambaati/codeclimate-action@v1
+        uses: paambaati/codeclimate-action@latest
         with:
           token: ${{ secrets.CODECLIMATE_TOKEN }}
           repo: ${{ github.repository }}
