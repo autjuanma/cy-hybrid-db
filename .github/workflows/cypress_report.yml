@@ -15,44 +15,36 @@ jobs:
     steps:
       - name: Checkout code repository 📂
         uses: actions/checkout@v3
-
       - name: Install Cypress 📦
         run: npm install cypress
-
       - name: Install CodeClimate 🌡️
         run: npm install codeclimate
-
       - name: Verify CodeClimate installation
         run: npm ls codeclimate
-
       - name: Cache Cypress dependencies 💻
         uses: actions/cache@v3
         id: cache-cypress-deps
         with:
           path: ~/.npm
           key: ${{ runner.os }}-cypress-deps-${{ matrix.cypress }}
-
       - name: Cache Cypress binary 💻
         uses: actions/cache@v3
         id: cache-cypress-binary
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-binary-${{ matrix.cypress }}
-
       - name: Restore Cypress dependencies 🔙
         uses: actions/cache@v3
         id: restore-cypress-deps
         with:
           path: ~/.npm
           key: ${{ runner.os }}-cypress-deps-${{ matrix.cypress }}
-
       - name: Restore Cypress binary 🔙
         uses: actions/cache@v3
         id: restore-cypress-binary
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-binary-${{ matrix.cypress }}
-
       - name: Run Cypress tests 🧪
         uses: cypress-io/github-action@v5
         continue-on-error: true
@@ -60,19 +52,14 @@ jobs:
           browser: chrome
         env:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
       - name: Run CodeClimate 🧪
         run: npm run codeclimate analyze
-
       - name: Merge test results into one 📊
         run: npm run report:merge
-
       - name: Generate HTML report 📊
         run: npm run report:generate
-
       - name: Generate Report 📊
         run: npm run codeclimate report --format=html > codeclimate-report.html
-
       - name: Publish report to GitHub Pages 📄
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
