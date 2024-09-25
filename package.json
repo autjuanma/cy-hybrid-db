@@ -9,7 +9,7 @@
     "cypress-dashboard": "npx cypress run --record --key b41729fe-db97-4304-bab1-c1f47c4dda01",
     "report:merge": "mochawesome-merge cypress/reports/TestReport/*.json > index.json",
     "report:generate": "marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html",
-    "codeclimate": "codeclimate analyze" 
+    "codeclimate": "codeclimate analyze"
   },
   "keywords": [],
   "author": "",
