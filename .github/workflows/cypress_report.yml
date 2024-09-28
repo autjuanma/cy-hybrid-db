@@ -52,9 +52,10 @@ jobs:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Run Percy 📊
         run: |
-          npx percy exec -- cypress run
+          npx percy exec -- cypress run --headless
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          CYPRESS_BASE_URL: http://localhost:8080
       - name: Run Code Analysis 🔍
         uses: github/codeql-action/analyze@v2
         with:
