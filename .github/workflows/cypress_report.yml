@@ -1,5 +1,4 @@
-name: Cy CI  🤖🚀👨🏻‍💻🦾🚀🏅🙋‍♂️🕵🏻
-     
+name: CI Cypress report
 
 on:
   workflow_dispatch:
@@ -57,7 +56,7 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       - name: Run CodeClimate ❓
-        uses: codeclimate/codeclimate-action@v3.1.1
+        uses: codeclimate/codeclimate-action@latest
         with:
           token: ${{ secrets.CODECLIMATE_TOKEN }}
           repo: ${{ github.repository }}
