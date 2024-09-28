@@ -56,7 +56,7 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       - name: Run Code Analysis 🔍
-        uses: github/codeql-action@v2
+        uses: github/codeql-action/analyze@v2
         with:
           languages: 'javascript'
           queries: 'security-extended'
