@@ -52,7 +52,7 @@ jobs:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Run Percy 📊
         run: |
-          npx cypress run --headless --browser chrome --percy
+          npx percy snapshot --token ${{ secrets.PERCY_TOKEN }} --project-name OctoApi --project-url https://percy.io/092c4373/OctoApi --build-number ${{ github.run_number }} --build-url ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           CYPRESS_BASE_URL: http://localhost:8080
