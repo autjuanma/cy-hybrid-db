@@ -55,13 +55,13 @@ jobs:
           npx percy exec -- cypress run
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      - name: Run CodeClimate ❓
-        uses: codeclimate/codeclimate-action@latest
+      - name: Run Code Analysis 🔍
+        uses: github/codeql-action@v2
         with:
-          token: ${{ secrets.CODECLIMATE_TOKEN }}
-          repo: ${{ github.repository }}
-          format: html
-          output: codeclimate-report.html
+          languages: 'javascript'
+          queries: 'security-extended'
+          format: 'html'
+          output: 'code-analysis-report.html'
       - name: Merge test results into one 📊
         run: npm run report:merge
       - name: Generate HTML report 📄
