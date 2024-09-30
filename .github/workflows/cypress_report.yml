@@ -1,5 +1,4 @@
-name: CI Cypress report
-
+name: CI Cy report and CD
 on:
   workflow_dispatch:
   push:
