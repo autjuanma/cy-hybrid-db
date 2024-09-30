@@ -52,7 +52,7 @@ jobs:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Run Percy 📊
         run: |
-          npx percy exec -- cypress run
+          npx cypress run --percy
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           CYPRESS_BASE_URL: http://localhost:8080
