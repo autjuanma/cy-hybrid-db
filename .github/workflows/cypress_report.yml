@@ -52,6 +52,7 @@ jobs:
           CYPRESS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Run Percy 📊
         run: |
+          npx percy snapshot --all --cypress-run
           npx percy exec -- cypress run
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
