@@ -1,46 +1,49 @@
 describe('Create Table with Valid Columns', () => {
-  it('creates a table with valid columns', () => {
-    // Check if the queryDb task is a function
-    console.log(typeof cy.task('queryDb'));
-
-    // Grant the CREATE privilege on the my_cy_database database to the adm user
-    cy.task('queryDb', `GRANT CREATE ON DATABASE my_cy_database TO adm`).then(() => {
-      // Create a new schema for the test and grant privileges on that schema
-      cy.task('queryDb', `CREATE SCHEMA my_test_schema`).then(() => {
-        cy.task('queryDb', `GRANT CREATE ON SCHEMA my_test_schema TO adm`).then(() => {
-          // If we reach this point, the GRANT command was executed successfully
-        });
+  it.only('creates a table with valid columns', () => {
+    // Create the database
+    cy.task('queryDb', `CREATE DATABASE mycydatabase`)
+      .then(() => {
+        // Grant the CREATE privilege on the mycydatabase database to the adm user
+        return cy.task('queryDb', `GRANT CREATE ON DATABASE mycydatabase TO adm`);
+      })
+      .then(() => {
+        // Create a new schema for the test and grant privileges on that schema
+        return cy.task('queryDb', `CREATE SCHEMA my_test_schema`);
+      })
+      .then(() => {
+        return cy.task('queryDb', `GRANT CREATE ON SCHEMA my_test_schema TO adm`);
+      })
+      .then(() => {
+        // Update the CREATE TABLE command to use the new schema
+        return cy.task('queryDb', `
+          CREATE TABLE my_test_schema.users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(50),
+            email VARCHAR(100) UNIQUE
+          )
+        `);
+      })
+      .then((result) => {
+        expect(result.command).to.eq('CREATE TABLE');
+        // Update the SELECT commands to use the new schema
+        return cy.task('queryDb', `
+          SELECT * FROM information_schema.tables 
+          WHERE table_name = 'users' AND table_schema = 'my_test_schema'
+        `);
+      })
+      .then((result) => {
+        expect(result.rows).to.have.lengthOf(1);
+        return cy.task('queryDb', `
+          SELECT * FROM information_schema.columns 
+          WHERE table_name = 'users' AND table_schema = 'my_test_schema'
+        `);
+      })
+      .then((result) => {
+        const columns = result.rows;
+        expect(columns[0]).to.contain('id SERIAL PRIMARY KEY');
+        expect(columns[1]).to.contain('name VARCHAR(50)');
+        expect(columns[2]).to.contain('email VARCHAR(100) UNIQUE');
       });
-    });
-
-    // Update the CREATE TABLE command to use the new schema
-    cy.task('queryDb', `
-      CREATE TABLE my_test_schema.users (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(50),
-        email VARCHAR(100) UNIQUE
-      )
-    `).then((result) => {
-      expect(result.command).to.eq('CREATE TABLE');
-    });
-
-    // Update the SELECT commands to use the new schema
-    cy.task('queryDb', `
-      SELECT * FROM information_schema.tables 
-      WHERE table_name = 'users' AND table_schema = 'my_test_schema'
-    `).then((result) => {
-      expect(result.rows).to.have.lengthOf(1);
-    });
-
-    cy.task('queryDb', `
-      SELECT * FROM information_schema.columns 
-      WHERE table_name = 'users' AND table_schema = 'my_test_schema'
-    `).then((result) => {
-      const columns = result.rows;
-      expect(columns[0]).to.contain('id SERIAL PRIMARY KEY');
-      expect(columns[1]).to.contain('name VARCHAR(50)');
-      expect(columns[2]).to.contain('email VARCHAR(100) UNIQUE');
-    });
   });
 });
 
@@ -107,3 +110,6 @@ describe('Create Table with Indexes', () => {
       .should('contain', 'idx_salary');
   });
 });
+
+
+

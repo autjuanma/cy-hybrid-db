@@ -1,6 +1,8 @@
 const { defineConfig } = require('cypress');
 const { Pool } = require('pg');
 
+
+
 function getEnv() {
   return {
     db: {

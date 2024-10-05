@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+//
+// -- Add the cy.sql command --
+Cypress.Commands.add('sql', (query) => {
+    return cy.task('queryDb', query);
+  });
